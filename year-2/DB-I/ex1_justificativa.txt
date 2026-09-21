@@ -1,0 +1,26 @@
+1. Generalização/especialização de Funcionário {
+- Decidimos modelar a generalização/especialização de funcionários como parcial e exclusiva (xp), 
+pois um funcionário pode não ser nem mecânico nem atendente e também não pode ser ambos ao mesmo tempo.
+}
+
+2. Modelagem dos serviços realizados {
+- Decidimos modelar os serviços realizados como uma entidade "registro", intermediária entre
+serviço e OS. Para armazenar as informaçoes necessárias sem precisar criar atributos a relacionamentos.
+}
+
+3. Associação entre mecânico, serviço e OS {
+- Decidimos modelar os serviços realizados como um relacionamento linear 
+entre mecânico, serviço, registro e ordem de serviço, para maior simplicidade.
+}
+
+4. Modelagem das peças utilizadas {
+- Decidimos fazer do mesmo modo que os serviços realizados, 
+pelos mesmos motivos.
+}
+
+
+5. Principais cardinalidades adotadas{
+- 1 x 1;
+- 1 x n;
+- 0 x n;
+}
