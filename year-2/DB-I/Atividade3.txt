@@ -1,0 +1,188 @@
+Parte 1:
+
+a) Garantir a integridade dos dados em um banco de dados significa manter todos os dados armazenados consistentes de acordo com o seu tipo e limitações definidas pelo usuário ou sistema e certificar que dados que aparecem em múltiplas tabelas não carreguem valores divergentes.
+
+b) Integridade de entidade:
+- Procura garantir que toda linha em um banco de dados relacional seja identificável, ou seja, que ela sempre carregue uma chave primária válida;
+- Para que haja integridade em um entidade, é necessário que ela possua uma chave primária válida;
+- Não, pois isso pode comprometer a identificação da entidade;
+- Não, pelo mesmo motivo do item anterior;
+- Caso essas regras não forem respeitadas, há o risco de que entidades se tornem irreferenciáveis e que dados sejam escritos, deletados e acessados erroneamente
+
+Ex: Padeiro(pk nome, fk padaria), Padaria(pk nome)  -> Padeiro("Marco", "Marco's"), Padaria("NULL") Nesse caso, o padeiro carrega uma referência incorreta e a padaria está inacessível.	
+
+c) Integridade referencial:
+- Procura garantir que os relacionamentos entre tabelas permançam válidos e coerentes;
+- Ela determina que toda chave estrangeira em uma tabela referenciadora obrigatóriamente deve apontar para uma
+chave primária na tabela referenciada;
+- Não, pois isso comprometeria a integridade referencial;
+- Um registro órfão contém uma chave estrangeira que aponta para uma entidade inexistente;
+- A exclusão de um registro referenciado por outra tabela pode gerar registros órfãos;
+
+Ex: DEPTO:	Id	n_funcionarios		FUNCIONARIO:	nome	Id_DEPTO	
+		10	3					Ana	20
+		
+- O banco retornará um erro nessa tentativa de cadastro, pois a funcionária Ana referencia um departamento de id 20, que não existe.
+
+d) Integridade de domínio:
+- O domínio de um atributo é o conjunto de todos os valores que ele pode assumir;
+- Podemos determinar os valores válidos a partir das informações reais que serão representadas. Ex: idade deve ser um inteiro positivo;
+- Sim, especificar um tipo de dado restringe o domínio de um atributo;
+- Sim, como o mecanismo check, que verifica se um dado atende a um determinado requisito ao invés de analizar o seu tipo.
+- Preço deve ser um unsigned float ou equivalente, pois deve ser sempre positivo e ter casas decimais para representar os centavos.
+- Estoque deve ser um unsigned int ou equivalente, pois não pode haver estoque negativo e pedaços de produtos não são comercializáveis;
+
+
+Parte 2:
+
+		Problema encontrado		Por que é um problema?    	Tipo de integridade    		Regra que deveria existir
+	
+		Mouse com preço negativo	Preço está fora do domínio	Domínio				Preço sempre positivo
+		Pedido 101 com valor negativo	Valor está fora do domínio	Domínio				Valor sempre positivo
+		Pedido 102 com fk idCliente 99	Não há cliente com id 99	Referencial			Toda fk deve referenciar uma pk existente	
+		Monitor com estoque negativo	Estoque negativo é impossível	Domínio				Estoque sempre positivo
+		João com email da Ana		Gera erros na comunicação	Entidade			Clientes diferentes não podem ter emails iguais
+		Produto 13 sem nome		Dificulta a identificação	Domínio				Nome deve ser notNull
+		Pedido 103 sem data		Gera problemas administrativos	Domínio				Data deve ser notNull
+		Cliente 4 sem nome		Dificulta a identificação	Domínio				Nome deve ser notNull
+			
+
+
+Parte 3:
+
+[e] [r] [d]
+
+[e]r1 - Todo cliente deve possuir identificador único;
+[e]r2 - Todo produto deve possuir identificador único;
+[e]r3 - Todo pedido deve possuir identificador único;
+[r]r4 - Um pedido somente poderá referenciar um cliente existente.
+[e]r5 - Todo cliente deve possuir um email único;
+[d]r6 - Preço não pode ser negativo;
+[d]r7 - Estoque deve ser inteiro não negativo;
+[d]r8 - Valor não pode ser negativo;
+[d]r9 - Todo pedido deve ter uma data.
+
+
+Parte 4:
+
+PK 
+{
+	Procura garantir que todos os elementos de uma tabela sejam identificáveis;
+	Diferenciar dois clientes de mesmo nome.
+}
+
+FK 
+{
+	Procura garantir uma interação segura entre tabelas;
+	Um elemento de uma tabela precisa de informações de intens em outras tabelas.
+}
+
+NOT NULL
+{
+	Procura garantir que determinado campo não esteja vazio;
+	Quando um usuário tenta criar um login sem uma senha.
+}
+
+UNIQUE
+{
+	Procura garantir que não haja valores repetidos em determinado campo;
+	Para números de telefone e emails.
+}
+
+CHECK
+{
+	Procura garantir que os valores de determinado campo atendem a certos requisitos;
+	Investimentos com aporte mínimo;
+}
+
+DEFAULT
+{
+	Procura garantir que um campo assuma determinado valor caso ele não tenha sido especificado pelo usuário;
+	Em qual pasta um aplicativo será instalado;
+}
+
+
+Final:
+
+Necessidade 
+										Mecanismo que você utilizaria
+									
+Identificar cada cliente de maneira única 					Primary Key
+	
+Impedir um cliente sem nome 							NOT NULL
+
+Impedir dois clientes com o mesmo e-mail 					UNIQUE
+
+Impedir preço negativo 								CHECK
+		
+Garantir que um pedido pertença a um cliente existente 				FK
+	
+Fazer um produto iniciar com estoque zero quando nenhum valor for informado	DEFAULT
+
+
+Existe relação entre os problemas de integridade estudados e os mecanismos encontrados durante sua pesquisa? Explique.
+R: Sim, cada mecanismo resolve um dos problemas de integridade estudados.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
